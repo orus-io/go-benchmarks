@@ -69,3 +69,29 @@ go test -bench . map_vs_switch.go
 ### Result
 
 A switch/case is faster than a map lookup up to 90 (+/-30) items.
+
+## equalfold_vs_tolower_test.go
+
+Given a list of random-case strings and lowercase string, we want to compare the
+later to each item of the list.
+Which is faster between:
+
+```go
+strings.EqualFold(s1, s2) // case1
+s1 == strings.ToLower(s2) // case2
+```
+
+### Run
+
+```bash
+go test -bench . equalfold_vs_tolower_test.go
+```
+
+### Result
+
+```
+BenchmarkLower-8        10000000               167 ns/op
+BenchmarkEqualFold-8    50000000                35.2 ns/op
+```
+
+EqualFold wins!
